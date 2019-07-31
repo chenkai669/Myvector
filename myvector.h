@@ -1,4 +1,7 @@
 #pragma once
+
+
+//æ­¤ç±»ä»…ä¸ºå­¦ä¹ é€ è½®å­ï¼Œç›®å‰åªæ”¯æŒPODç±»å‹
 #include <iostream>
 using namespace std;
 #include<iostream>
@@ -26,57 +29,57 @@ public:
 			save = nullptr;
 		sz = 0;
 		remain = 0;
-		cout << "ÎŞ²Î¹¹Ôì" << endl;
+		cout << "æ— å‚æ„é€ " << endl;
 	}
-	myvector(T s) :sz(s), elem(new T[s]),save(nullptr)//¹¹Ôìº¯Êı£¬·ÖÅäs¸ödoubleÔªËØ£¬½«s±£´æµ½sizeÖĞ²¢ÈÃelemÖ¸ÏòÊ×ÔªËØµØÖ·
+	myvector(T s) :sz(s), elem(new T[s]),save(nullptr)//æ„é€ å‡½æ•°ï¼Œåˆ†é…sä¸ªdoubleå…ƒç´ ï¼Œå°†sä¿å­˜åˆ°sizeä¸­å¹¶è®©elemæŒ‡å‘é¦–å…ƒç´ åœ°å€
 	{
 		startptr = elem[0];
 		endptr = elem[s]
 		remain = 0;
-		cout << "ÓĞ²Î¹¹Ôì" << endl;
+		cout << "æœ‰å‚æ„é€ " << endl;
 	}
 
-	myvector(const myvector& vec) :elem(new T[vec.sz]), sz(vec.sz) //¿½±´¹¹Ôìº¯Êı °üº¬Ö¸Õë½øĞĞÉî¿½±´ Ğ§ÂÊµÍÏÂ
+	myvector(const myvector& vec) :elem(new T[vec.sz]), sz(vec.sz) //æ‹·è´æ„é€ å‡½æ•° åŒ…å«æŒ‡é’ˆè¿›è¡Œæ·±æ‹·è´ æ•ˆç‡ä½ä¸‹
 	{
-		cout << "¿½±´¹¹Ôì" << endl;
+		cout << "æ‹·è´æ„é€ " << endl;
 		for (int i = 0; i < vec.sz; i++)
 		{
 			elem[i] = vec.elem[i];
 		}
 	}
-	myvector(myvector&& vec) noexcept //ÒÆ¶¯¹¹Ôì£¬Õë¶Ôvec´Ëºó²»ĞèÒªµÄÇé¿ö
+	myvector(myvector&& vec) noexcept //ç§»åŠ¨æ„é€ ï¼Œé’ˆå¯¹vecæ­¤åä¸éœ€è¦çš„æƒ…å†µ
 	{
 		this->elem = vec.elem;
 		this->sz = vec.sz;
 		delete vec.elem;
-		vec.elem = nullptr	// ½«vecÊÍ·Å
-		cout << "ÒÆ¶¯¹¹Ôì" << endl;
+		vec.elem = nullptr	// å°†vecé‡Šæ”¾
+		cout << "ç§»åŠ¨æ„é€ " << endl;
 	}
-	T& operator[](int i) //·µ»ØÏÂ±êÎªiµÄÒıÓÃ
+	T& operator[](int i) //è¿”å›ä¸‹æ ‡ä¸ºiçš„å¼•ç”¨
 	{
 		return elem[i];
 	}
 
 	int size() const { return sz; }
 
-	~myvector() //Îö¹¹º¯Êı£¬ÊÍ·Åelem
+	~myvector() //ææ„å‡½æ•°ï¼Œé‡Šæ”¾elem
 	{
 		if(elem != nullptr)
 			delete[] elem;
-		//cout << "Îö¹¹" << this << endl;
+		//cout << "ææ„" << this << endl;
 	}
-	T at(int n) const //¶Á
+	T at(int n) const //è¯»
 	{
 		if(n<sz)
 			return elem[n];
-		return elem[sz+1];//Ô½½ç·µ»Ønullptr;
+		return elem[sz+1];//è¶Šç•Œè¿”å›nullptr;
 	} 
 
 	T back()
 	{
 		return elem[sz-1];
 	}
-	void set(T n, T v) //Ö¸¶¨Î»ÖÃĞ´Èë
+	void set(T n, T v) //æŒ‡å®šä½ç½®å†™å…¥
 	{ 
 		if (n <= sz)
 		{
@@ -85,17 +88,17 @@ public:
 
 
 	}  
-	void push_back(T value) //Î²²¿Ğ´Èë
+	void push_back(T value) //å°¾éƒ¨å†™å…¥
 	{
 		if (sz == 0)
 		{
-			elem = new T[sz + 5];//Ä¬ÈÏÉêÇë5¸ö¿Õ¼ä
+			elem = new T[sz + 5];//é»˜è®¤ç”³è¯·5ä¸ªç©ºé—´
 			elem[sz] = value;
 			startptr = &elem[0];
 			//elem[sz +1] = '\s';	
 			//for (int n = 0; n < sz+2; ++n)
 			//{
-			//	if (elem[n] == nullptr) //ÕÒµ½Î²°Í½Úµã
+			//	if (elem[n] == nullptr) //æ‰¾åˆ°å°¾å·´èŠ‚ç‚¹
 			//	{
 					endptr = &elem[sz+1];
 			//	}
@@ -118,25 +121,25 @@ public:
 			}
 			else 
 			{ 
-				//Èç¹ûÃ»ÓĞÊ£Óà¿Õ¼ä ÔòÖØĞÂ¿ª±Ù+1¿Õ¼ä
+				//å¦‚æœæ²¡æœ‰å‰©ä½™ç©ºé—´ åˆ™é‡æ–°å¼€è¾Ÿ+1ç©ºé—´
 				//save = new T[sz]; 
-				save = elem;		//±£´æÖ®Ç°µÄÊı¾İ
+				save = elem;		//ä¿å­˜ä¹‹å‰çš„æ•°æ®
 
 				elem = new T[sz * 2];
 				//elem = new T[sz +10];
-				for (int n = 0; n < sz; ++n)//Êı¾İ¿½±´(¿½±´ÓĞĞ§Êı¾İÇøÓò)
+				for (int n = 0; n < sz; ++n)//æ•°æ®æ‹·è´(æ‹·è´æœ‰æ•ˆæ•°æ®åŒºåŸŸ)
 				{
 					elem[n] = save[n];
 				}
 				elem[sz] = value;
-				startptr = &elem[0]; //Í·Ö¸ÕëÖØĞÂ»ñÈ¡
-				//for (int n = sz+1; n < sz+10; ++n)//½«Ê£Óà¿Õ¼ä¸³Öµnullptr
+				startptr = &elem[0]; //å¤´æŒ‡é’ˆé‡æ–°è·å–
+				//for (int n = sz+1; n < sz+10; ++n)//å°†å‰©ä½™ç©ºé—´èµ‹å€¼nullptr
 				//{
 					//elem[sz+1] = '\s';
 				//}
-				//for (int n = sz; n < sz + 2; ++n) //ÕÒµ½Ò»¸ö sz+1 Îªnullptr
+				//for (int n = sz; n < sz + 2; ++n) //æ‰¾åˆ°ä¸€ä¸ª sz+1 ä¸ºnullptr
 				//{
-					//if (elem[n] == nullptr) //ÕÒµ½Î²°Í½Úµã
+					//if (elem[n] == nullptr) //æ‰¾åˆ°å°¾å·´èŠ‚ç‚¹
 					//{
 						endptr = &elem[sz+1];
 					//}
@@ -144,7 +147,7 @@ public:
 				sz++;
 				delete save;
 				save = nullptr;
-				remain = sz-2;	//×ÜµÄ´óĞ¡ ¼õÈ¥ ÒÑÊ¹ÓÃ´óĞ¡-1(nullptr)
+				remain = sz-2;	//æ€»çš„å¤§å° å‡å» å·²ä½¿ç”¨å¤§å°-1(nullptr)
 				//cout << "sz = " << sz << endl;
 				cout << "push_back success" << endl;
 			}
@@ -153,20 +156,20 @@ public:
 	
 	}
 
-	T* erase(T num)//É¾³ıÖ¸¶¨ÔªËØ,·µ»ØÖ¸ÏòÏÂÒ»¸öÔªËØµÄÖ¸Õë
+	T* erase(T num)//åˆ é™¤æŒ‡å®šå…ƒç´ ,è¿”å›æŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ çš„æŒ‡é’ˆ
 	{
-		if (startptr) //´æÔÚÓĞĞ§ÔªËØ
+		if (startptr) //å­˜åœ¨æœ‰æ•ˆå…ƒç´ 
 		{
-			if (num == *startptr) //É¾³ıÊ×ÔªËØ
+			if (num == *startptr) //åˆ é™¤é¦–å…ƒç´ 
 			{
 				for (int i = 0; i < sz; i++)
-					elem[i] = elem[i + 1];	//ºóÒ»¸öÔªËØ °ÑÇ°Ò»¸öÔªËØ¸²¸Ç
+					elem[i] = elem[i + 1];	//åä¸€ä¸ªå…ƒç´  æŠŠå‰ä¸€ä¸ªå…ƒç´ è¦†ç›–
 				sz--;
 				//endptr = &elem[sz];
 				//cout << "earse " << num << "success" << endl;
 				return &elem[0];
 			}
-			if (num == elem[sz])//É¾³ıÄ©Î²ÔªËØ Ä©Î²·Çsz+1 
+			if (num == elem[sz])//åˆ é™¤æœ«å°¾å…ƒç´  æœ«å°¾ész+1 
 			{
 				elem[sz] = elem[sz + 1];
 				sz--;
@@ -174,13 +177,13 @@ public:
 				//cout << "earse " << num << "success" << endl;
 				return &elem[sz];
 			}
-			else//É¾³ıÖĞ¼äÔªËØ
+			else//åˆ é™¤ä¸­é—´å…ƒç´ 
 			{
 				for (int i = 0; i < sz + 1; i++)
 				{
 					if (elem[i] == *endptr)
 					{
-						//cout << "Î´ÕÒµ½¸ÃÔªËØ" << endl;
+						//cout << "æœªæ‰¾åˆ°è¯¥å…ƒç´ " << endl;
 						return 0;
 					}
 					else
@@ -202,7 +205,7 @@ public:
 		}
 		else
 		{
-			cout << "vector»¹Ã»ÓĞÔªËØ" << endl;
+			cout << "vectorè¿˜æ²¡æœ‰å…ƒç´ " << endl;
 		}
 	}	
 
@@ -222,19 +225,19 @@ public:
 		return false;
 	}
 
-	void clear()	//É¾³ıÈİÆ÷ËùÓĞÔªËØ
+	void clear()	//åˆ é™¤å®¹å™¨æ‰€æœ‰å…ƒç´ 
 	{
 		delete[]elem;
 		elem = new T[sz];
 		sz = 0;
 	}
-	T* reserve() //´¦ÀíÀ©Èİ´øÀ´µÄÄÚ´æÀË·ÑÎÊÌâ
+	T* reserve() //å¤„ç†æ‰©å®¹å¸¦æ¥çš„å†…å­˜æµªè´¹é—®é¢˜
 	{
 		elem = realloc(elem, sz + 1);
-		return &elem[0];//·µ»ØĞÂ¿Õ¼äÊ×µØÖ·
+		return &elem[0];//è¿”å›æ–°ç©ºé—´é¦–åœ°å€
 	}
 
-	void acess() //·ÃÎÊ
+	void acess() //è®¿é—®
 	{
 
 
@@ -265,12 +268,12 @@ public:
 		return myvector(1);
 	}
 private:
-	int sz;		//vectorÒÑÓÃ´óĞ¡
-	T* elem;	//¿ÉµÄÒÆ¶¯Ö¸Õë
-	T* save;	//ÁÙÊ±±£´æÉÏÒ»´ÎÊı¾İÇøÖ¸Õë
-	T* endptr;	//Í·½ÚµãÖ¸Õë
-	T* startptr;	//Î²°Í½ÚµãÖ¸Õë
-	int remain;		//Ê£Óà¿Õ¼ä	
+	int sz;		//vectorå·²ç”¨å¤§å°
+	T* elem;	//å¯çš„ç§»åŠ¨æŒ‡é’ˆ
+	T* save;	//ä¸´æ—¶ä¿å­˜ä¸Šä¸€æ¬¡æ•°æ®åŒºæŒ‡é’ˆ
+	T* endptr;	//å¤´èŠ‚ç‚¹æŒ‡é’ˆ
+	T* startptr;	//å°¾å·´èŠ‚ç‚¹æŒ‡é’ˆ
+	int remain;		//å‰©ä½™ç©ºé—´	
 };
 
 
