@@ -1,6 +1,4 @@
 #pragma once
-
-
 //此类仅为学习造轮子，目前只支持POD类型
 #include <iostream>
 using namespace std;
